@@ -588,8 +588,6 @@ public class Main {
                 } catch (SQLException e) {
                     System.out.println("Fehler bei der Suche: " + e.getMessage());
                 }
-
-
     }
 }
 
