@@ -16,9 +16,11 @@ public class Notebook {
         this.beschreibung = beschreibung;
         this.speicherplatz = speicherplatz;
         this.prozessor = prozessor;
+        String test;
 
     }
     public int getFortlaufendenummer() {return fortlaufendenummer;}
+
     public void setFortlaufendenummer(int fortlaufendenummer) {
         this.fortlaufendenummer = fortlaufendenummer;
     }
