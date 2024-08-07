@@ -1,0 +1,19 @@
+[ {
+  "titel" : "Franzosen",
+  "beschreibung" : "Geht um Franzosen",
+  "autorVorname" : "Hans",
+  "autorNachname" : "Müller",
+  "buchSprache" : "französisch",
+  "isbn" : "67578567887",
+  "erscheinungsdatum" : "23.08.2019",
+  "fortlaufendenummer" : 1
+}, {
+  "titel" : "Deutsche",
+  "beschreibung" : "Geht um Deutsche",
+  "autorVorname" : "Max",
+  "autorNachname" : "Mustermann",
+  "buchSprache" : "deutsch",
+  "isbn" : "8087098097",
+  "erscheinungsdatum" : "16.12.1999",
+  "fortlaufendenummer" : 2
+} ]
