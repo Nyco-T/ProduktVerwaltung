@@ -1,11 +1,11 @@
 package mercatis.com;
 
 public class Notebook {
-    private int fortlaufendenummer;
-    private String titel;
-    private String beschreibung;
-    private int speicherplatz;
-    private String prozessor;
+    private final int fortlaufendenummer;
+    private final String titel;
+    private final String beschreibung;
+    private final int speicherplatz;
+    private final String prozessor;
     public Notebook(int fortlaufendenummer, String titel, String beschreibung, int speicherplatz, String prozessor) {
         this.fortlaufendenummer = fortlaufendenummer;
         this.titel = titel;
