@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.sql.*;
-
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/Bibliotek";
@@ -17,8 +16,6 @@ public class Main {
     private static final ArrayList<Geschaeftswagen> geschaeftswagenListe = new ArrayList<>();
     private static int fortlaufendenummer = 1;
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
-
     public static void main(String[] args) {
         boolean running = true;
         while (running) {
@@ -47,8 +44,6 @@ public class Main {
         }
         scanner.close();
     }
-
-
     private static void displayMainMenu() {
         System.out.println("\n--- Produktverwaltung ---");
         System.out.println("1. Bücher verwalten");
@@ -58,7 +53,6 @@ public class Main {
         System.out.println("5. Beenden");
         System.out.print("Wählen Sie eine Option: ");
     }
-
     private static int getMenuChoice() {
         while (!scanner.hasNextInt()) {
             System.out.println("Bitte geben Sie eine Zahl ein.");
@@ -66,7 +60,6 @@ public class Main {
         }
         return scanner.nextInt();
     }
-
     private static void manageBuecher() {
         boolean running = true;
         while (running) {
@@ -95,8 +88,6 @@ public class Main {
         }
         scanner.close();
     }
-
-
         private static void bookDisplayMenu() {
             System.out.println("\n--- Bücherverwaltung ---");
             System.out.println("1. Buch hinzufügen");
@@ -106,7 +97,6 @@ public class Main {
             System.out.println("5. Beenden");
             System.out.print("Wählen Sie eine Option: ");
         }
-
         private static int getBookMenuChoice () {
             while (!scanner.hasNextInt()) {
                 System.out.println("Bitte geben Sie eine Zahl ein.");
@@ -114,7 +104,6 @@ public class Main {
             }
             return scanner.nextInt();
         }
-
         private static void addBook () {
             scanner.nextLine();
             System.out.print("Geben Sie den Titel des Buches an: ");
@@ -129,7 +118,6 @@ public class Main {
             String buchSprache = scanner.nextLine();
             System.out.print("Geben Sie die ISBN an: ");
             String isbn = scanner.nextLine();
-
             Date erscheinungsdatum = null;
             while (erscheinungsdatum == null) {
                 System.out.print("Wann ist das Buch erschienen? (Format: dd.MM.yyyy): ");
@@ -140,7 +128,6 @@ public class Main {
                     System.out.println("Ungültiges Datumsformat. Bitte versuchen Sie es erneut.");
                 }
             }
-
             Buch buch = new Buch(fortlaufendenummer, titel, beschreibung, autorVorname, autorNachname, buchSprache, isbn, erscheinungsdatum);
             buecherListe.add(buch);
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -154,7 +141,6 @@ public class Main {
                 pstmt.setString(6, buchSprache);
                 pstmt.setString(7, isbn);
                 pstmt.setDate(8, new java.sql.Date(erscheinungsdatum.getTime()));
-
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {
                     System.out.println("Buch wurde erfolgreich hinzugefügt.");
@@ -164,13 +150,10 @@ public class Main {
                 System.out.println("Fehler beim Hinzufügen des Buches: " + e.getMessage());
             }
         }
-
-
         private static void displayBooks () {
             String query = "SELECT * FROM bücher";
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
-
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (!rs.isBeforeFirst()) {
                         System.out.println("Keine Bücher gefunden.");
@@ -192,7 +175,6 @@ public class Main {
                 System.out.println("Fehler bei der Suche: " + e.getMessage());
             }
         }
-
         private static void deleteBook () {
             displayBooks();
             System.out.print("Geben Sie die Nummer des zu löschenden Buches ein: ");
@@ -211,13 +193,10 @@ public class Main {
                 System.out.println("Fehler beim Löschen des Buches: " + e.getMessage());
             }
         }
-
-
         private static void searchBooks () {
             scanner.nextLine();
             System.out.print("Geben Sie einen Suchbegriff ein (Titel, Autor, ISBN): ");
             String searchTerm = scanner.nextLine().toLowerCase();
-
             String query = "SELECT * FROM bücher WHERE LOWER(titel) LIKE ? OR LOWER(autorVorname) LIKE ? OR LOWER(autorNachname) LIKE ? OR isbn LIKE ?";
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -226,7 +205,6 @@ public class Main {
                 pstmt.setString(2, wildcardTerm);
                 pstmt.setString(3, wildcardTerm);
                 pstmt.setString(4, wildcardTerm);
-
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (!rs.isBeforeFirst()) {
                         System.out.println("Keine Bücher gefunden.");
@@ -248,7 +226,6 @@ public class Main {
                 System.out.println("Fehler bei der Suche: " + e.getMessage());
             }
         }
-
     private static void manageNotebooks(){
         boolean running = true;
         while (running) {
@@ -286,7 +263,6 @@ public class Main {
         System.out.println("5. Beenden");
         System.out.print("Wählen Sie eine Option: ");
     }
-
     private static int getNotebookMenuChoice () {
         while (!scanner.hasNextInt()) {
             System.out.println("Bitte geben Sie eine Zahl ein.");
@@ -294,7 +270,6 @@ public class Main {
         }
         return scanner.nextInt();
     }
-
     private static void addNotebook() {
         scanner.nextLine();
         System.out.print("Geben Sie den Titel des Notebooks an: ");
@@ -326,8 +301,6 @@ public class Main {
             System.out.println("Fehler beim Hinzufügen des Notebooks: " + e.getMessage());
         }
     }
-
-
     private static void displayNotebooks () {
         String query = "SELECT * FROM notebooks";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -352,8 +325,6 @@ public class Main {
             System.out.println("Fehler bei der Suche: " + e.getMessage());
         }
     }
-
-
     private static void deleteNotebook() {
         displayNotebooks();
         System.out.print("Geben Sie die Nummer des zu löschenden Notebooks ein: ");
@@ -372,13 +343,10 @@ public class Main {
             System.out.println("Fehler beim Löschen des Notebooks: " + e.getMessage());
         }
     }
-
-
     private static void searchNotebooks() {
         scanner.nextLine();
         System.out.print("Geben Sie einen Suchbegriff ein (Titel, Beschreibung, Prozessor): ");
         String searchTerm = scanner.nextLine().toLowerCase();
-
         String query = "SELECT * FROM notebooks WHERE LOWER(titel) LIKE ? OR LOWER(beschreibung) LIKE ? OR LOWER(prozessor)LIKE ?";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -386,7 +354,6 @@ public class Main {
             pstmt.setString(1, wildcardTerm);
             pstmt.setString(2, wildcardTerm);
             pstmt.setString(3, wildcardTerm);
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (!rs.isBeforeFirst()) {
                     System.out.println("Keine Notebooks gefunden.");
@@ -406,7 +373,6 @@ public class Main {
             System.out.println("Fehler bei der Suche: " + e.getMessage());
         }
     }
-
     private static void manageGeschaeftswagen(){
         boolean running = true;
         while (running) {
@@ -444,7 +410,6 @@ public class Main {
         System.out.println("5. Beenden");
         System.out.print("Wählen Sie eine Option: ");
     }
-
     private static int getWagenMenuChoice () {
         while (!scanner.hasNextInt()) {
             System.out.println("Bitte geben Sie eine Zahl ein.");
@@ -452,7 +417,6 @@ public class Main {
         }
         return scanner.nextInt();
     }
-
     private static void addWagen() {
         scanner.nextLine();
         System.out.print("Geben Sie den Namen des Autos an: ");
@@ -484,8 +448,6 @@ public class Main {
             System.out.println("Fehler beim Hinzufügen des Autos: " + e.getMessage());
         }
     }
-
-
     private static void displayWagen () {
         String query = "SELECT * FROM geschaeftswagen";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -510,8 +472,6 @@ public class Main {
             System.out.println("Fehler bei der Suche: " + e.getMessage());
         }
     }
-
-
     private static void deleteWagen() {
         displayNotebooks();
         System.out.print("Geben Sie die Nummer des zu löschenden Autos ein: ");
@@ -530,8 +490,6 @@ public class Main {
             System.out.println("Fehler beim Löschen des Autos: " + e.getMessage());
         }
     }
-
-
     private static void searchWagen() {
         scanner.nextLine();
         System.out.print("Geben Sie einen Suchbegriff ein (Titel, Farbe, Standort): ");
@@ -564,12 +522,10 @@ public class Main {
             System.out.println("Fehler bei der Suche: " + e.getMessage());
         }
     }
-
     private static void manageAllProducts(){
             String query = "SELECT * FROM bücher";
             try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                  PreparedStatement pstmt = conn.prepareStatement(query)) {
-
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (!rs.isBeforeFirst()) {
                         System.out.println("Keine Bücher gefunden.");
