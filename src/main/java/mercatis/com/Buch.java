@@ -1,7 +1,6 @@
 package mercatis.com;
 
 import java.util.Date;
-
 public class Buch {
     private int fortlaufendenummer;
     private String titel;
@@ -11,8 +10,6 @@ public class Buch {
     private String buchSprache;
     private String isbn;
     private Date erscheinungsdatum;
-
-
     public Buch(int fortlaufendenummer, String titel, String beschreibung, String autorVorname, String autorNachname, String buchSprache, String isbn, Date erscheinungsdatum) {
         this.fortlaufendenummer = fortlaufendenummer;
         this.titel = titel;

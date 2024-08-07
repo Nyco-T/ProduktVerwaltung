@@ -6,7 +6,6 @@ public class Notebook {
     private String beschreibung;
     private int speicherplatz;
     private String prozessor;
-
     public Notebook(int fortlaufendenummer, String titel, String beschreibung, int speicherplatz, String prozessor) {
         this.fortlaufendenummer = fortlaufendenummer;
         this.titel = titel;
@@ -15,5 +14,4 @@ public class Notebook {
         this.prozessor = prozessor;
 
     }
-
 }

@@ -6,7 +6,6 @@ public class Geschaeftswagen {
     private String beschreibung;
     private int kmStand;
     private String parkplatz;
-
     public Geschaeftswagen(int fortlaufendenummer, String titel, String beschreibung, int kmStand , String parkplatz)
     {
         this.fortlaufendenummer = fortlaufendenummer;
@@ -16,5 +15,4 @@ public class Geschaeftswagen {
         this.parkplatz = parkplatz;
 
     }
-
 }
