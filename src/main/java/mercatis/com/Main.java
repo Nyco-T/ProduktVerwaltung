@@ -4,7 +4,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.sql.*;
 
 public
@@ -13,9 +12,6 @@ class Main {
     private static final String                        DB_URL               = "jdbc:postgresql://localhost:5432/Bibliotek";
     private static final String                        DB_USER              = "postgres";
     private static final String                        DB_PASSWORD          = "mercatis";
-    private static final ArrayList < Buch >            buecherListe         = new ArrayList <> ( );
-    private static final ArrayList < Notebook >        notebookListe        = new ArrayList <> ( );
-    private static final ArrayList < Geschaeftswagen > geschaeftswagenListe = new ArrayList <> ( );
     private static       int                           fortlaufendenummer   = 1;
     private static final SimpleDateFormat              dateFormat           = new SimpleDateFormat ( "dd.MM.yyyy" );
 
@@ -145,8 +141,6 @@ class Main {
                 System.out.println ( "Ungültiges Datumsformat. Bitte versuchen Sie es erneut." );
             }
         }
-        Buch buch = new Buch ( fortlaufendenummer , titel , beschreibung , autorVorname , autorNachname , buchSprache , isbn , erscheinungsdatum );
-        buecherListe.add ( buch );
         try (
                 Connection conn = DriverManager.getConnection ( DB_URL , DB_USER , DB_PASSWORD ) ;
                 PreparedStatement pstmt = conn.prepareStatement (
@@ -327,8 +321,6 @@ class Main {
         scanner.nextLine ( );
         System.out.print ( "Welcher Prozessor is in Ihrem Notebook verbaut?: " );
         String   prozessor = scanner.nextLine ( );
-        Notebook notebook  = new Notebook ( fortlaufendenummer , titel , beschreibung , speicherplatz , prozessor );
-        notebookListe.add ( notebook );
         try (
                 Connection conn = DriverManager.getConnection ( DB_URL , DB_USER , DB_PASSWORD ) ;
                 PreparedStatement pstmt = conn.prepareStatement (
@@ -503,8 +495,6 @@ class Main {
         scanner.nextLine ( );
         System.out.print ( "Wo steht Ihr Auto?: " );
         String          parkplatz = scanner.nextLine ( );
-        Geschaeftswagen auto      = new Geschaeftswagen ( fortlaufendenummer , titel , beschreibung , kmStand , parkplatz );
-        geschaeftswagenListe.add ( auto );
         try (
                 Connection conn = DriverManager.getConnection ( DB_URL , DB_USER , DB_PASSWORD ) ;
                 PreparedStatement pstmt = conn.prepareStatement (
