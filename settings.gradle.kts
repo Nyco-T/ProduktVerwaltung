@@ -1,1 +1,1 @@
-rootProject.name = "BuecherVerwaltung"
+rootProject.name = "ProduktVerwaltung"
